@@ -1,0 +1,43 @@
+{
+  "extensionVersion": "1.5.4",
+  "fileName": "/workspaces/f215-digital-design-dd-2026-verilog-labs-amigod123/artefacts/lab01/task2_tb.vcd",
+  "markerTime": 4,
+  "altMarkerTime": null,
+  "displayTimeUnit": "s",
+  "selectedSignal": {
+    "name": "tb.DUT.cout",
+    "msb": -1,
+    "lsb": -1
+  },
+  "zoomRatio": 162.32478632478632,
+  "scrollLeft": 0,
+  "defaultPixelTime": 100,
+  "displayedSignals": [
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 4,
+      "name": "tb.DUT.sum",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "sum",
+      "renderType": "multiBit",
+      "valueLinkEnable": false
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 3,
+      "name": "tb.DUT.cout",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "cout",
+      "renderType": "binary",
+      "valueLinkEnable": false
+    }
+  ]
+}
