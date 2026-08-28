@@ -106,3 +106,4 @@ module cla64_flat(
   assign #(2) sum = p ^ {c[63:1], cin};
 
 endmodule
+
