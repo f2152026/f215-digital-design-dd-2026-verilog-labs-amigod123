@@ -1,14 +1,8 @@
 // cla64_blocked.v
-// A practical 64-bit adder: sixteen 4-bit CLA blocks (your cla4.v),
-// chained by feeding block k's carry-out into block (k+1)'s carry-in --
-// the same instantiate-and-chain pattern as Task 2's ripple adder, just
-// using 4-bit CLA blocks instead of single full adders.
-//
-// TODO: instantiate 16 cla4 blocks, named block0..block15, e.g.:
-//   cla4 block0 (.a(a[3:0]),    .b(b[3:0]),    .cin(cin),  .sum(sum[3:0]),    .cout(c[1]));
-//   cla4 block1 (.a(a[7:4]),    .b(b[7:4]),    .cin(c[1]), .sum(sum[7:4]),    .cout(c[2]));
-//   ...
-//   cla4 block15(.a(a[63:60]),  .b(b[63:60]),  .cin(c[15]),.sum(sum[63:60]),  .cout(cout));
+// A practical 64-bit adder: sixteen 4-bit CLA blocks (cla4.v), chained by
+// feeding block k's carry-out into block (k+1)'s carry-in. Instantiated
+// with a generate-for loop since every block is structurally identical --
+// only the bit-slice and which carry wire feeds in/out changes.
 
 module cla64_blocked(
   input  [63:0] a,
@@ -18,8 +12,22 @@ module cla64_blocked(
   output        cout
 );
 
-  wire [15:1] c;   // carries BETWEEN blocks: c[1]..c[15]
+  wire [16:0] c;   // c[0] = cin, c[1]..c[15] = inter-block carries, c[16] = cout
+  assign c[0] = cin;
 
-  // TODO: your sixteen cla4 instances go here.
+  genvar k;
+  generate
+    for (k = 0; k < 16; k = k + 1) begin : gen_block
+      cla4 block (
+        .a    (a[k*4+3 : k*4]),
+        .b    (b[k*4+3 : k*4]),
+        .cin  (c[k]),
+        .sum  (sum[k*4+3 : k*4]),
+        .cout (c[k+1])
+      );
+    end
+  endgenerate
+
+  assign cout = c[16];
 
 endmodule
